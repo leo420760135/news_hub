@@ -7,51 +7,41 @@
  */
 
 include "header.php";
-$active_page = "index_page";
-include_once "news_list.php";
+include_once "get_news_list.php";
+include_once "connect.php";
 include_once "class.php";
+include_once "session.php";
+
+$active_page = "index_page";
+$connect = connect();
+//获取新闻列表array
+$news_list = get_news_list($connect,$class_list,0,10);
+//var_dump($news_list);
 $tabs = "";
 $tab_content_list = "";
-foreach ($class_list as $key=>$value) {
+
+
+foreach ($class_list as $key=>$value)
+{
+    //生成页签
     $tabs.=<<<EOT
 <li role="presentation" id="{$key}-li" class=""><a href="#{$key}" id="{$key}-tab" role="tab" data-toggle="tab" aria-controls="{$key}">{$value}</a></li>
 EOT;
-    $news_list_str = "";
-    if(count($news_list[$key])>0)
-    {
-        foreach ($news_list[$key] as $index=>$news_arr) {
-            $news_list_str.=<<<EOT
-<tr>
-  <th scope="row">
-    <a href="news_detail.php?id={$news_arr['id']}">{$news_arr['title']}</a>
-  </th>
-  <td>{$news_arr['timestamp']}</td>
-  <td>{$news_arr['source']}</td>
-  <td>{$news_arr['view_count']}</td>
-</tr>
-EOT;
-        }
+    //生成用于显示的新闻列表
+    $news_list_str = get_news_list_str($news_list,$key,$_SESSION["privilege"]);
 
-    }
+    //生成页签内容
     $tab_content_list.=<<<EOT
 <div role="tabpanel" class="tab-pane fade" id="{$key}" aria-labelledBy="{$key}-tab">
-    <table class="table table-hover">
-      <thead>
-        <tr>
-          <th>新闻标题</th>
-          <th>发布时间</th>
-          <th>新闻来源</th>
-          <th>浏览量</th>
-        </tr>
-      </thead>
-      <tbody>
-      {$news_list_str}
-      </tbody>
-    </table>
+    {$news_list_str}
+    <div class="">
+        <a href="more_news.php?class={$key}" class="btn btn-success col-md-offset-10">更多...</a>
+    </div>
 </div>
 EOT;
 }
 
+//激活的页签
 $active_tab = array_keys($class_list)[0];
 
 $content = <<<EOT
@@ -62,6 +52,7 @@ $content = <<<EOT
         {$tab_content_list}
     </div>
 EOT;
+
 $script = <<<EOT
         $("#{$active_tab}-li").attr("class","active");
         $("#{$active_tab}-tab").attr("aria-expanded","true");

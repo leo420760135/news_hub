@@ -23,6 +23,7 @@ elseif($_SESSION['privilege'] <1)
 if(!isset($text_to_edit))
 {
     $text_to_edit = "在这里输入新闻内容";
+    $title = "";
 }
 
 $class_options = "";
@@ -41,7 +42,7 @@ $content = <<<EOT
             <div class="col-md-7 form-group">
                 <label for="news_title" class="col-md-2 control-label">标题</label>
                 <div class=" col-md-10">
-                <input type="text" class="form-control" name="news_title" id="news_title" placeholder="标题">
+                <input type="text" class="form-control" name="news_title" id="news_title" placeholder="标题" value="{$title}">
                 </div>
             </div>
             <div class="form-group col-md-5">

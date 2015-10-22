@@ -5,9 +5,6 @@
     <li id="publish_page" class="">
         <a href="publish.php">发布新闻</a>
     </li>
-    <li id="admin_page" class="">
-        <a href="admin.php">Admin</a>
-    </li>
     <li id="about_page" class="">
         <a href="about.php">关于我们</a>
     </li>
