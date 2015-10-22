@@ -15,7 +15,7 @@ $news_list = get_news_list($connect,$class_list,0,10);
 function get_news_list(PDO $connect,array $class_list, $start, $count)
 {
     $news_list = null;
-    $sql = "select id,title,source,timestamp from news where class=:key order by timestamp desc limit $start,$count;";//PDO bug with limit statement
+    $sql = "select id,title,source,timestamp,view_count from news where class=:key order by timestamp desc limit $start,$count;";//PDO bug with limit statement
     foreach($class_list as $key=>$value )
     {
         $prepare = $connect->prepare($sql);

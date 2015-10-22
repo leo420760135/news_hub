@@ -7,6 +7,7 @@
  */
 include_once "connect.php";
 include_once "class.php";
+include_once "redirect.php";
 $connect = connect();
 $news_id = $_GET["id"];
 $sql = "SELECT * FROM news WHERE id = {$news_id};";
@@ -14,7 +15,9 @@ $result = $connect->query($sql);
 $array = $result->fetch(PDO::FETCH_ASSOC);
 if($array)
 {
-
+    $array["view_count"]++;
+    $sql = "update news set view_count={$array["view_count"]} where id={$news_id};";
+    $connect->exec($sql);
     $content = <<<EOT
 <div class="page-header">
    <h1 class="text-center">
@@ -27,6 +30,7 @@ if($array)
            来源:{$array["source"]}
            作者:{$array["publisher"]}
            时间:{$array["timestamp"]}
+           浏览量:{$array["view_count"]}
            </small></small>
        </div>
    </h1>
@@ -38,12 +42,7 @@ EOT;
 }
 else
 {
-    echo <<<EOT
-<script>
-    alert("该内容不存在！");
-    window.location.href="index.php";
-</script>
-EOT;
+    redirect("index.php",'alert("该内容不存在！");');
 
 }
 

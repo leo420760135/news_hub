@@ -23,10 +23,11 @@ EOT;
             $news_list_str.=<<<EOT
 <tr>
   <th scope="row">
-    <a href="news_detail.php?id={$news_arr['id']}">{$news_arr['title']}[{$news_arr['timestamp']}]</a><br>
+    <a href="news_detail.php?id={$news_arr['id']}">{$news_arr['title']}</a>
   </th>
   <td>{$news_arr['timestamp']}</td>
   <td>{$news_arr['source']}</td>
+  <td>{$news_arr['view_count']}</td>
 </tr>
 EOT;
         }
@@ -40,6 +41,7 @@ EOT;
           <th>新闻标题</th>
           <th>发布时间</th>
           <th>新闻来源</th>
+          <th>浏览量</th>
         </tr>
       </thead>
       <tbody>

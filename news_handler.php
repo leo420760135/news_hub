@@ -8,6 +8,7 @@
 include_once "session.php";
 include_once "connect.php";
 include_once "class.php";
+include_once "redirect.php";
 $connect = connect();
 $news_title = $_POST["news_title"];
 $news_class = $_POST["news_class"];
@@ -24,3 +25,9 @@ $prepare->execute(array(
     ':news_class'=>$news_class
     ));
 //$connect->exec($sql);
+
+$sql = "select max(id) from news where publisher='{$_SESSION["user_name"]}';";
+$result = $connect->query($sql);
+$id = $result->fetch(PDO::FETCH_NUM)[0];
+
+redirect("news_detail.php?id={$id}");

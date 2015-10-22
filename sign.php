@@ -4,6 +4,7 @@ if(!isset($_SESSION))
     session_start();
 }
 $_SESSION['user_name']="news_hub_anonymous_user";
+$_SESSION['privilege']=-1;
 
 $content = <<<EOT
 
@@ -14,7 +15,7 @@ $content = <<<EOT
             <h2>用户登录</h2>
 			<section>
 			<input type="hidden" name="type" value="in">
-            <p><input class="form-control" type="text" name="username" placeholder="用户名" ></p>
+            <p><input class="form-control" type="text" name="user_name" placeholder="用户名" ></p>
             <p><input class="form-control" type="password" name="password" placeholder="密码" ></p>
 			</section>
 		  <br>
@@ -27,9 +28,9 @@ $content = <<<EOT
             <h2>没有帐户？</h2>
             <section>
 			<input type="hidden" name="type" value="up">
-            <p><input class="form-control" type="text" name="username" placeholder="用户名" ></p>
+            <p><input class="form-control" type="text" name="user_name" placeholder="用户名" ></p>
             <p><input class="form-control" type="password" name="password" placeholder="密码" ></p>
-			<p><input class="form-control" type="password" name="passwordAg" placeholder="确认密码" ></p>
+			<p><input class="form-control" type="password" name="password_ag" placeholder="确认密码" ></p>
 			</section>
 			<section class="span8"></section>
             <section class="span1"><input type="submit" value=" 注册 " class="btn"></section>
