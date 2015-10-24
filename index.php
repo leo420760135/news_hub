@@ -35,7 +35,7 @@ EOT;
 <div role="tabpanel" class="tab-pane fade" id="{$key}" aria-labelledBy="{$key}-tab">
     {$news_list_str}
     <div class="">
-        <a href="more_news.php?class={$key}" class="btn btn-success col-md-offset-10">更多...</a>
+        <a href="more_news.php?class={$key}" class="btn btn-success col-md-offset-10">更多 <span class="glyphicon glyphicon-forward" aria-hidden="true"></span></a>
     </div>
 </div>
 EOT;

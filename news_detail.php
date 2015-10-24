@@ -38,6 +38,9 @@ if($array)
 {$array["detail"]}
 EOT;
 
+    include "news_comment.php";
+    $content.=$comment;
+
     include "layout.php";
 }
 else

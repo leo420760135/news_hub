@@ -66,12 +66,21 @@ if(isset($header))
 ?>
 <!-- =========================	Content	========================= -->
 <div class="container">
-    <div class="row-fluid">
+    <div class="row-fluid col-md-10">
 
         <?php echo $content;?>
 
     </div>
 </div>
+
+    <!-- Footer
+================================================== -->
+    <hr>
+    <footer>
+        <div class="container text-center">
+            <p>News Hub 小组</p>
+        </div>
+    </footer>
 
 <!-- =========================	Script	========================= -->
 <script src="js/jquery.min.js"></script>
