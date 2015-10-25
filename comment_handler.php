@@ -26,11 +26,31 @@ $connect = connect();
 $result = $connect->query($sql);
 $array = $result->fetch(PDO::FETCH_ASSOC);
 $com_id = 1;
-if(!$array)
+if($array)
 {
     $com_id = $array["m_id"]+1;
 }
 
 $sql = "insert into comment(news_id,user_name,detail,timestamp,com_id) values({$news_id},'{$user_name}','{$detail}',now(),{$com_id});";
 $result = $connect->exec($sql);
-var_dump($sql);
+if($result ==1)
+{
+    echo <<<EOT
+    <meta charset="utf-8">
+    <script>
+    alert("评论成功");
+    history.go(-1);
+    </script>
+EOT;
+
+}
+else
+{
+    echo <<<EOT
+    <meta charset="utf-8">
+    <script>
+    alert("评论失败");
+    history.go(-1);
+    </script>
+EOT;
+}

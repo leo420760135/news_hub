@@ -8,10 +8,14 @@
 
 
 
-function get_news_list(PDO $connect,array $class_list, $start, $count)
+function get_news_list(PDO $connect,array $class_list, $start, $count, $publisher = "")
 {
     $news_list = null;
     $sql = "select id,title,source,timestamp,view_count from news where class=:key order by timestamp desc limit $start,$count;";//PDO bug with limit statement
+    if($publisher !="")
+    {
+        $sql = "select id,title,source,timestamp,view_count from news where publisher='{$publisher}' and class=:key order by timestamp desc limit $start,$count;";
+    }
     foreach($class_list as $key=>$value )
     {
         $prepare = $connect->prepare($sql);

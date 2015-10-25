@@ -34,7 +34,7 @@ $submit_comment = <<<EOT
 EOT;
 
 $comment_list = get_comment_list($connect,$news_id);
-$comment_list_str = get_comment_list_str($comment_list,$_SESSION["privilege"],$news_id);
+$comment_list_str = get_comment_list_str($comment_list,$_SESSION["privilege"]);
 
 $comment = <<<EOT
 <div class="page-header">

@@ -39,7 +39,14 @@ $content = <<<EOT
         </section>
 EOT;
 $active_page = "sign_page";
-include "header.php";
+$header = <<<EOT
+    <div class="jumbotron masthead">
+        <div class="container">
+            <h1>登录 News Hub</h1>
+            <p>发现更大的世界</p>
+        </div>
+    </div>
+EOT;
 $style = <<<EOT
 	*{margin:0;padding: 0;}
       body{background: #444}
