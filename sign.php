@@ -40,7 +40,7 @@ $content = <<<EOT
 EOT;
 $active_page = "sign_page";
 $header = <<<EOT
-    <div class="jumbotron masthead">
+    <div class="jumbotron masthead" id="news_hub" style="color:#FFFFFF">
         <div class="container">
             <h1>登录 News Hub</h1>
             <p>发现更大的世界</p>
@@ -54,5 +54,18 @@ $style = <<<EOT
       .loginBox h2{height:45px;font-size:20px;font-weight:normal;}
       .loginBox .left{border-right:1px solid #ccc;height:100%;padding-right: 20px; }
 	  .loginBox .right{solid #ccc;height:100%;padding-right: 20px; }
+    #news_hub {
+  background: #020031; /* Old browsers */
+  background: -moz-linear-gradient(45deg,  #020031 0%, #6d3353 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left bottom, right top, color-stop(0%,#020031), color-stop(100%,#6d3353)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(45deg,  #020031 0%,#6d3353 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(45deg,  #020031 0%,#6d3353 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(45deg,  #020031 0%,#6d3353 100%); /* IE10+ */
+  background: linear-gradient(45deg,  #020031 0%,#6d3353 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#020031', endColorstr='#6d3353',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+  -webkit-box-shadow: inset 0 3px 7px rgba(0,0,0,.2), inset 0 -3px 7px rgba(0,0,0,.2);
+     -moz-box-shadow: inset 0 3px 7px rgba(0,0,0,.2), inset 0 -3px 7px rgba(0,0,0,.2);
+          box-shadow: inset 0 3px 7px rgba(0,0,0,.2), inset 0 -3px 7px rgba(0,0,0,.2);
+}
 EOT;
 include "layout.php";

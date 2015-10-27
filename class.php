@@ -7,10 +7,8 @@
  */
 
 $class_list = array(
-    "science"=>"科技",
-    "entertainment"=>"娱乐",
-    "military"=>"军事",
+    "tech"=>"科技",
+    "ent"=>"娱乐",
+    "finance"=>"财经",
     "sports"=>"体育",
-    "social"=>"社会",
-    "world"=>"国际",
-    "other"=>"其他");
+    "edu"=>"教育");
