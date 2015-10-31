@@ -19,11 +19,12 @@ elseif($_SESSION['privilege'] <2)
 {
     redirect("about.php","alert('您的权限不足，请联系管理员！')");
 }
+else
+{
+    $template_list = get_template_list();
+    $template_list_str = get_template_list_str($template_list,"template_edit.php");
 
-$template_list = get_template_list();
-$template_list_str = get_template_list_str($template_list,"template_edit.php");
-
-$ext_info = <<< EOT
+    $ext_info = <<< EOT
   <div class="panel panel-default">
     <div class="panel-heading" role="tab" id="headingThree">
       <h4 class="panel-title">
@@ -42,3 +43,5 @@ $ext_info = <<< EOT
     </div>
   </div>
 EOT;
+}
+

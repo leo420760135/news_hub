@@ -44,12 +44,15 @@ $content = <<<EOT
   <h1>{$class_list[$class]} <small>新闻</small></h1>
 </div>
 {$news_list_str}
+
 <div class="row">
-    <div class="col-md-4 col-md-offset-8">
-        第{$page}页 共{$page_count}页
-        <a href="more_news.php?class={$class}&page={$pre_page}" class="col-md-offset-1 btn btn-primary">上一页</a>
-        <a href="more_news.php?class={$class}&page={$next_page}" class="btn btn-primary">下一页</a>
-    </div>
+    <nav>
+      <ul class="pager">
+        <li>第{$page}页 共{$page_count}页</li>
+        <li><a href="more_news.php?class={$class}&page={$pre_page}">上一页</a></li>
+        <li><a href="more_news.php?class={$class}&page={$next_page}">下一页</a></li>
+      </ul>
+    </nav>
 </div>
 EOT;
 

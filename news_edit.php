@@ -21,36 +21,36 @@ elseif($_SESSION['privilege'] <1)
 {
     redirect("about.php","alert('您的权限不足，请联系管理员！')");
 }
-
-
-if(!isset($text_to_edit))
+else
 {
-    $text_to_edit = "在这里输入新闻内容";
-    $title = "";
-}
+    if(!isset($text_to_edit))
+    {
+        $text_to_edit = "在这里输入新闻内容";
+        $title = "";
+    }
 
 //是否第二次编辑
-$is_edit = "";
-if(isset($_GET["id"]))
-{
-    $is_edit = <<<EOT
+    $is_edit = "";
+    if(isset($_GET["id"]))
+    {
+        $is_edit = <<<EOT
     <input type = "hidden" name = "edit" value="{$_GET["id"]}">
 EOT;
-}
+    }
 
 //分类选项
-$class_options = "";
-foreach($class_list as $key=>$value)
-{
-    $class_options.=<<<EOT
+    $class_options = "";
+    foreach($class_list as $key=>$value)
+    {
+        $class_options.=<<<EOT
 <option value="{$key}">{$value}</option>
 EOT;
-}
+    }
 
-$template_list = get_template_list();
-$template_list_str = get_template_list_str($template_list,"publish.php");
+    $template_list = get_template_list();
+    $template_list_str = get_template_list_str($template_list,"publish.php");
 
-$content = <<<EOT
+    $content = <<<EOT
     <form class=" form-horizontal" action="{$handler}" method="post" style="margin-top:50px">
 
         <input type="hidden" id="content">
@@ -106,5 +106,8 @@ EOT;
 
 
 
-include "layout.php";
+    include "layout.php";
+
+}
+
 

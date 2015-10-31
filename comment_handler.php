@@ -16,26 +16,27 @@ if($_SESSION['privilege'] <0)
     redirect("sign.php","alert('请先登录！')");
 
 }
-
-$news_id = $_GET["news_id"];
-$user_name = $_GET["user_name"];
-$detail = $_POST["detail"];
-
-$sql ="select max(com_id) as m_id from comment where news_id={$news_id} group by news_id;";
-$connect = connect();
-$result = $connect->query($sql);
-$array = $result->fetch(PDO::FETCH_ASSOC);
-$com_id = 1;
-if($array)
+else
 {
-    $com_id = $array["m_id"]+1;
-}
+    $news_id = $_GET["news_id"];
+    $user_name = $_GET["user_name"];
+    $detail = $_POST["detail"];
 
-$sql = "insert into comment(news_id,user_name,detail,timestamp,com_id) values({$news_id},'{$user_name}','{$detail}',now(),{$com_id});";
-$result = $connect->exec($sql);
-if($result ==1)
-{
-    echo <<<EOT
+    $sql ="select max(com_id) as m_id from comment where news_id={$news_id} group by news_id;";
+    $connect = connect();
+    $result = $connect->query($sql);
+    $array = $result->fetch(PDO::FETCH_ASSOC);
+    $com_id = 1;
+    if($array)
+    {
+        $com_id = $array["m_id"]+1;
+    }
+
+    $sql = "insert into comment(news_id,user_name,detail,timestamp,com_id) values({$news_id},'{$user_name}','{$detail}',now(),{$com_id});";
+    $result = $connect->exec($sql);
+    if($result ==1)
+    {
+        echo <<<EOT
     <meta charset="utf-8">
     <script>
     alert("评论成功");
@@ -43,14 +44,16 @@ if($result ==1)
     </script>
 EOT;
 
-}
-else
-{
-    echo <<<EOT
+    }
+    else
+    {
+        echo <<<EOT
     <meta charset="utf-8">
     <script>
     alert("评论失败");
     history.go(-1);
     </script>
 EOT;
+    }
 }
+

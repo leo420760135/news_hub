@@ -1,13 +1,17 @@
 <?php
 //下面两行使得这个项目被下载下来后本文件能直接运行
 $demo_include_path = dirname(__FILE__) . '/../';
-set_include_path(get_include_path() . PATH_SEPARATOR . $demo_include_path);
+$root_include_path = dirname(__FILE__) . '/../../';
+set_include_path(get_include_path() . PATH_SEPARATOR . $demo_include_path.PATH_SEPARATOR.$root_include_path);
 
 require_once('phpfetcher.php');
 require_once('connect.php');
+require_once('class.php');
+require_once('send_email.php');
 
 class myclass{
     public  static  $class = "tech";
+    public  static $news_list = [];
 }
 
 
@@ -24,11 +28,17 @@ class mycrawler extends Phpfetcher_Crawler_Default {
 
             if(!$this->news_exist($title))
             {
-                echo $title."<br>";
+                //echo $title."<br>";
+                myclass::$news_list[] = $title;
                 $detail = "";
                 $res = $page->sel('//p');
                 for ($i = 0; $i < count($res); ++$i) {
-                    $detail .="<p>". $res[$i]->plaintext."</p>";
+                    $html = $res[$i]->innertext;
+                    if(strpos($html,"relativeVideo")===false && strpos($html,"coral.qq.com") ===false)
+                    {
+                        $detail .="<p>".$html."</p>";
+                    }
+
                 }
                 $this->insert_news($title,$detail,myclass::$class);
             }
@@ -88,3 +98,28 @@ $arrJobs = array(
 $crawler->setFetchJobs($arrJobs)->run(); //这一行的效果和下面两行的效果一样
 //$crawler->setFetchJobs($arrJobs);
 //$crawler->run();
+
+function send_news_list(array $news_list,$class_name)
+{
+    $title = "{$class_name}新闻";
+    $content = "";
+    foreach ($news_list as $index=>$news_title) {
+        $content .= $news_title."\n";
+    }
+    $content .= <<<EOT
+详情请见：http://newshub.sinaapp.com
+EOT;
+
+    $sql = "select name,email from user where email like '%@%';";
+    $connect = connect();
+    $result = $connect->query($sql);
+    while($temp = $result->fetch(PDO::FETCH_ASSOC))
+    {
+        $content= "亲爱的 {$temp["name"]}，以下是最新的{$class_name}新闻： \n".$content;
+        send_email($temp["email"],$title,$content);
+    }
+}
+
+send_news_list(myclass::$news_list,$class_list[myclass::$class]);
+//var_dump(myclass::$news_list);
+

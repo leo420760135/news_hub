@@ -21,28 +21,13 @@ $header = <<< EOT
   <!-- Wrapper for slides -->
   <div class="carousel-inner" role="listbox">
     <div class="item active">
-    <div class="jumbotron" id="news_hub">
-        <div class="container" style="color:#FFFFFF">
-            <h1>News Hub</h1>
-            <p>发现更大的世界</p>
-        </div>
-    </div>
+<img src="img/1.png" alt="News_Hub">
     </div>
     <div class="item">
-    <div class="jumbotron" style="background-image:url(img/1.jpg);background-size:cover">
-        <div class="container" style="color:#FFFFFF">
-            <h1>科技新闻</h1>
-            <p>IT资讯</p>
-        </div>
-    </div>
+<img src="img/2.png" alt="tech">
     </div>
     <div class="item">
-    <div class="jumbotron" style="background-image:url(img/2.jpg);background-size:cover">
-        <div class="container" style="color:#FFFFFF">
-            <h1>娱乐新闻</h1>
-            <p>娱乐八卦</p>
-        </div>
-    </div>
+<img src="img/3.png" alt="ent">
     </div>
   </div>
 

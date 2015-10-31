@@ -19,18 +19,20 @@ elseif($_SESSION['privilege'] <1)
 {
     redirect("about.php","alert('您的权限不足，请联系管理员！')");
 }
+else
+{
+    $connect = connect();
+    $template_name=$_POST["news_title"];
+    $template_detail = $_POST["news_content"];
 
-$connect = connect();
-$template_name=$_POST["news_title"];
-$template_detail = $_POST["news_content"];
+    $sql = "insert into template(name,detail) values(:name,:detail);";
 
-$sql = "insert into template(name,detail) values(:name,:detail);";
+    $prepare = $connect->prepare($sql) ;
 
-$prepare = $connect->prepare($sql) ;
+    $prepare->execute(array(
+        ':name'=>$template_name,
+        ':detail'=>$template_detail
+    ));
 
-$prepare->execute(array(
-    ':name'=>$template_name,
-    ':detail'=>$template_detail
-));
-
-redirect("user_info.php");
+    redirect("user_info.php");
+}

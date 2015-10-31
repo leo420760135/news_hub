@@ -40,15 +40,18 @@ function sign_up(PDO $connect,$name,$password,$password_ag)
     {
         redirect("sign.php","alert('两次输入的密码不一致');");
     }
-    $sql = "insert into user(name,psw) values ('{$name}','{$password}');";
-    $result = $connect->exec($sql);
-    if($result == true)
-    {
-        sign_in($connect,$name,$password);
-    }
     else
     {
-        redirect("sign.php","alert('注册失败')");
+        $sql = "insert into user(name,psw) values ('{$name}','{$password}');";
+        $result = $connect->exec($sql);
+        if($result == true)
+        {
+            sign_in($connect,$name,$password);
+        }
+        else
+        {
+            redirect("sign.php","alert('用户名已存在，注册失败')");
+        }
     }
 }
 

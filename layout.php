@@ -8,7 +8,13 @@ include_once "session.php";
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="css/bootstrap.css" rel="stylesheet">
-    <link href="css/bootstrap-responsive.css" rel="stylesheet">
+    <?php
+    if(isset($link))
+    {
+        echo $link;
+    }
+
+    ?>
     <style>
         <?php
         if(isset($style))
@@ -26,13 +32,7 @@ include_once "session.php";
     }
 
     ?>
-    <?php
-    if(isset($link))
-    {
-        echo $link;
-    }
 
-    ?>
 </head>
 
 
@@ -66,16 +66,15 @@ if(isset($header))
 ?>
 <!-- =========================	Content	========================= -->
 <div class="container">
-    <div class="row-fluid col-md-10">
+    <div class="row-fluid">
 
         <?php echo $content;?>
 
     </div>
 </div>
 
-    <!-- Footer
-================================================== -->
-    <hr>
+    <!-- ==========================Footer======================== -->
+<hr>
     <footer>
         <div class="container text-center">
             <p>News Hub 小组</p>
