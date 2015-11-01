@@ -39,9 +39,7 @@ class Uploader
         "ERROR_UNKNOWN" => "未知错误",
         "ERROR_DEAD_LINK" => "链接不可用",
         "ERROR_HTTP_LINK" => "链接不是http链接",
-        "ERROR_HTTP_CONTENTTYPE" => "链接contentType不正确",
-        "INVALID_URL" => "非法 URL",
-        "INVALID_IP" => "非法 IP"
+        "ERROR_HTTP_CONTENTTYPE" => "链接contentType不正确"
     );
 
     /**
@@ -107,21 +105,24 @@ class Uploader
             $this->stateInfo = $this->getStateInfo("ERROR_TYPE_NOT_ALLOWED");
             return;
         }
+        if(IS_SAE){
+            $this->upFileToSae();
+        }else {
+            //创建目录失败
+            if (!file_exists($dirname) && !mkdir($dirname, 0777, true)) {
+                $this->stateInfo = $this->getStateInfo("ERROR_CREATE_DIR");
+                return;
+            } else if (!is_writeable($dirname)) {
+                $this->stateInfo = $this->getStateInfo("ERROR_DIR_NOT_WRITEABLE");
+                return;
+            }
 
-        //创建目录失败
-        if (!file_exists($dirname) && !mkdir($dirname, 0777, true)) {
-            $this->stateInfo = $this->getStateInfo("ERROR_CREATE_DIR");
-            return;
-        } else if (!is_writeable($dirname)) {
-            $this->stateInfo = $this->getStateInfo("ERROR_DIR_NOT_WRITEABLE");
-            return;
-        }
-
-        //移动文件
-        if (!(move_uploaded_file($file["tmp_name"], $this->filePath) && file_exists($this->filePath))) { //移动失败
-            $this->stateInfo = $this->getStateInfo("ERROR_FILE_MOVE");
-        } else { //移动成功
-            $this->stateInfo = $this->stateMap[0];
+            //移动文件
+            if (!(move_uploaded_file($file["tmp_name"], $this->filePath) && file_exists($this->filePath))) { //移动失败
+                $this->stateInfo = $this->getStateInfo("ERROR_FILE_MOVE");
+            } else { //移动成功
+                $this->stateInfo = $this->stateMap[0];
+            }
         }
     }
 
@@ -147,25 +148,31 @@ class Uploader
             $this->stateInfo = $this->getStateInfo("ERROR_SIZE_EXCEED");
             return;
         }
+        if(IS_SAE){
+            $this->upBase64ToSae();
+        }else{
+            //创建目录失败
+            if (!file_exists($dirname) && !mkdir($dirname, 0777, true)) {
+                $this->stateInfo = $this->getStateInfo("ERROR_CREATE_DIR");
+                return;
+            } else if (!is_writeable($dirname)) {
+                $this->stateInfo = $this->getStateInfo("ERROR_DIR_NOT_WRITEABLE");
+                return;
+            }
 
-        //创建目录失败
-        if (!file_exists($dirname) && !mkdir($dirname, 0777, true)) {
-            $this->stateInfo = $this->getStateInfo("ERROR_CREATE_DIR");
-            return;
-        } else if (!is_writeable($dirname)) {
-            $this->stateInfo = $this->getStateInfo("ERROR_DIR_NOT_WRITEABLE");
-            return;
+            //移动文件
+            if (!(file_put_contents($this->filePath, $img) && file_exists($this->filePath))) { //移动失败
+                $this->stateInfo = $this->getStateInfo("ERROR_WRITE_CONTENT");
+            } else { //移动成功
+                $this->stateInfo = $this->stateMap[0];
+            }
         }
-
-        //移动文件
-        if (!(file_put_contents($this->filePath, $img) && file_exists($this->filePath))) { //移动失败
-            $this->stateInfo = $this->getStateInfo("ERROR_WRITE_CONTENT");
-        } else { //移动成功
-            $this->stateInfo = $this->stateMap[0];
-        }
-
     }
-
+    /** 上传base64 图片到sae */
+    private function upBase64ToSae(){
+        $domain = 'ueditor';
+        $filePath = 'upload/';
+    }
     /**
      * 拉取远程图片
      * @return mixed
@@ -180,36 +187,15 @@ class Uploader
             $this->stateInfo = $this->getStateInfo("ERROR_HTTP_LINK");
             return;
         }
-
-        preg_match('/(^https*:\/\/[^:\/]+)/', $imgUrl, $matches);
-        $host_with_protocol = count($matches) > 1 ? $matches[1] : '';
-
-        // 判断是否是合法 url
-        if (!filter_var($host_with_protocol, FILTER_VALIDATE_URL)) {
-            $this->stateInfo = $this->getStateInfo("INVALID_URL");
-            return;
-        }
-
-        preg_match('/^https*:\/\/(.+)/', $host_with_protocol, $matches);
-        $host_without_protocol = count($matches) > 1 ? $matches[1] : '';
-
-        // 此时提取出来的可能是 ip 也有可能是域名，先获取 ip
-        $ip = gethostbyname($host_without_protocol);
-        // 判断是否是私有 ip
-        if(!filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE)) {
-            $this->stateInfo = $this->getStateInfo("INVALID_IP");
-            return;
-        }
-
         //获取请求头并检测死链
-        $heads = get_headers($imgUrl, 1);
+        $heads = get_headers($imgUrl);
         if (!(stristr($heads[0], "200") && stristr($heads[0], "OK"))) {
             $this->stateInfo = $this->getStateInfo("ERROR_DEAD_LINK");
             return;
         }
         //格式验证(扩展名验证和Content-Type验证)
         $fileType = strtolower(strrchr($imgUrl, '.'));
-        if (!in_array($fileType, $this->config['allowFiles']) || !isset($heads['Content-Type']) || !stristr($heads['Content-Type'], "image")) {
+        if (!in_array($fileType, $this->config['allowFiles']) || stristr($heads['Content-Type'], "image")) {
             $this->stateInfo = $this->getStateInfo("ERROR_HTTP_CONTENTTYPE");
             return;
         }
