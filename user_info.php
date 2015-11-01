@@ -47,17 +47,25 @@ else
           </div>
           <div class="form-group">
             <label for="old_password"></label>
-            <input type="password" class="form-control" name="old_password" id="old_password" placeholder="旧密码">
+            <input type="password" class="form-control" name="old_password" id="old_password" placeholder="密码">
           </div>
-          <div class="form-group">
-            <label for="new_password"></label>
-            <input type="password" class="form-control" name="new_password" id="new_password" placeholder="新密码">
-          </div>
-          <div class="form-group">
-            <label for="new_password_ag"></label>
-            <input type="password" class="form-control" name="new_password_ag" id="new_password_ag" placeholder="确认新密码">
-          </div>
-          <button type="submit" class="btn btn-success col-md-1 col-md-offset-11">修改</button>
+
+            <div class="collapse" id="update_pwd">
+              <div class="well">
+                  <div class="form-group">
+                    <label for="new_password"></label>
+                    <input type="password" class="form-control" name="new_password" id="new_password" placeholder="新密码">
+                  </div>
+                  <div class="form-group">
+                    <label for="new_password_ag"></label>
+                    <input type="password" class="form-control" name="new_password_ag" id="new_password_ag" placeholder="确认新密码">
+                  </div>
+              </div>
+            </div>
+          <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#update_pwd" aria-expanded="false" aria-controls="collapseExample">
+            修改密码
+          </button>
+          <button type="submit" class="btn btn-success col-md-2 col-md-offset-10">确认修改</button>
         </form>
       </div>
     </div>

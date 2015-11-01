@@ -15,5 +15,15 @@ $header = <<<EOT
     </div>
 EOT;
 $active_page = "about_page";
-$content = __FILE__;
+$content = <<<EOT
+<address>
+  <strong>组长</strong><br>
+  杨韬 |邮箱:<a href="mailto:420760135@qq.com">420760135@qq.com</a>
+</address>
+<address>
+  <strong>小组成员</strong><br>
+  张文林、巴合江、潘永鹏、高士奇、王元博、王艺帆、姚灏远
+</address>
+EOT;
+
 include "layout.php";
