@@ -99,7 +99,7 @@ $crawler->setFetchJobs($arrJobs)->run(); //这一行的效果和下面两行的�
 //$crawler->setFetchJobs($arrJobs);
 //$crawler->run();
 
-function send_news_list(array $news_list,$class_name)
+function send_news_list(array $news_list,$class,$class_name)
 {
     $title = "{$class_name}新闻";
     $content = "";
@@ -107,10 +107,10 @@ function send_news_list(array $news_list,$class_name)
         $content .= $news_title."\n";
     }
     $content .= <<<EOT
-详情请见：http://newshub.sinaapp.com
+详情请见：http://newshub.sinaapp.com/more_news.php?class={$class}
 EOT;
 
-    $sql = "select name,email from user where email like '%@%';";
+    $sql = "select name,email from user where exists (select * from subscribe where user_name=name and news_class='{$class}') and email like '%@%';";
     $connect = connect();
     $result = $connect->query($sql);
     while($temp = $result->fetch(PDO::FETCH_ASSOC))
@@ -120,6 +120,6 @@ EOT;
     }
 }
 
-send_news_list(myclass::$news_list,$class_list[myclass::$class]);
+send_news_list(myclass::$news_list,myclass::$class,$class_list[myclass::$class]);
 //var_dump(myclass::$news_list);
 
