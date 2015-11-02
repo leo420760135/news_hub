@@ -47,6 +47,6 @@ EOT;
 function delete_news($id)
 {
     $connect = connect();
-    $sql = "delete from news where id={$id};";
+    $sql = "delete from comment where news_id={$id};delete from news where id={$id};";
     return $connect->exec($sql);
 }

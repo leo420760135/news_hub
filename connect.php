@@ -10,9 +10,9 @@
 //用PDO方式连接数据库
 function connect()
 {
-//	 $dsn = 'mysql:dbname='.SAE_MYSQL_DB.';host='.SAE_MYSQL_HOST_M.';port='.SAE_MYSQL_PORT;
-//	 $user = SAE_MYSQL_USER;
-//	 $pw = SAE_MYSQL_PASS;
+	 // $dsn = 'mysql:dbname='.SAE_MYSQL_DB.';host='.SAE_MYSQL_HOST_M.';port='.SAE_MYSQL_PORT;
+	 // $user = SAE_MYSQL_USER;
+	 // $pw = SAE_MYSQL_PASS;
 	$dsn = 'mysql:dbname='.'news_hub'.';host='.'localhost'.';port='.'3306';
 	$user = 'root';
 	$pw = '';

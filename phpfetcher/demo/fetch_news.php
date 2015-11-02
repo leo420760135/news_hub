@@ -103,8 +103,10 @@ function send_news_list(array $news_list,$class,$class_name)
 {
     $title = "{$class_name}新闻";
     $content = "";
+    $i = 1;
     foreach ($news_list as $index=>$news_title) {
-        $content .= $news_title."\n";
+        $content .= $i.". ".$news_title."\n";
+        $i++;
     }
     $content .= <<<EOT
 详情请见：http://newshub.sinaapp.com/more_news.php?class={$class}

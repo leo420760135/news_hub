@@ -3,16 +3,16 @@ version: 1
 cron:
 - description: cron_tech
   url: /phpfetcher/demo/fetch_news.php?class=tech
-  schedule: "0 6 * * *"
+  schedule: "0 8 * * *"
 - description: cron_ent
   url: /phpfetcher/demo/fetch_news.php?class=ent
-  schedule: "5 6 * * *"
+  schedule: "5 8 * * *"
 - description: cron_sports
   url: /phpfetcher/demo/fetch_news.php?class=sports
-  schedule: "10 6 * * *"
+  schedule: "10 8 * * *"
 - description: cron_finance
   url: /phpfetcher/demo/fetch_news.php?class=finance
-  schedule: "15 6 * * *"
+  schedule: "15 8 * * *"
 - description: cron_edu
   url: /phpfetcher/demo/fetch_news.php?class=edu
-  schedule: "20 6 * * *"
+  schedule: "20 8 * * *"
