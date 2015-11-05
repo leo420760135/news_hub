@@ -40,7 +40,7 @@ else
     <meta charset="utf-8">
     <script>
     alert("评论成功");
-    history.go(-1);
+    self.location=document.referrer;
     </script>
 EOT;
 
