@@ -1,0 +1,542 @@
+|   about.php   //关于我们页面
+|   admin.php   //管理员页面
+|   class.php   //新闻分类列表
+|   comment_delete.php  //删除评论
+|   comment_handler.php //处理评论的提交
+|   config.yaml //SAE的配置文件
+|   connect.php //连接数据库的文件
+|   editor_user.php //新闻编辑的个人信息页面
+|   get_comment_list.php    //获取评论列表
+|   get_news_list.php   //获取新闻列表
+|   get_template_list.php   //获取新闻模板列表
+|   header.php  //界面显示中的header区域
+|   index.php   //首页
+|   layout.php  //布局页（作为整个网站的template）
+|   more_news.php   //新闻分类列表页
+|   nav.php //界面显示中的导航栏
+|   news_comment.php    //新闻评论页面
+|   news_delete.php //处理新闻删除
+|   news_detail.php //新闻详细内容页
+|   news_edit.php   //编辑新闻
+|   news_handler.php    //处理新闻的发布、提交
+|   publish.php //发布新闻
+|   redirect.php    //重定向方法
+|   session.php //SESSION管理
+|   sign.php    //登录界面
+|   sign_handler.php    //登录处理页面
+|   structure.txt   //文件夹结构
+|   subscribe_handler.php   //处理订阅事件
+|   temp.html   //测试用的临时页面
+|   template_edit.php   //编辑新闻模板
+|   template_handler.php    //处理新闻模板的提交事件
+|   update_user_info.php    //处理用户信息的更新
+|   user_info.php   //用户个人信息页面
+|
++---.idea
+|   |   .name
+|   |   deployment.xml
+|   |   encodings.xml
+|   |   misc.xml
+|   |   modules.xml
+|   |   NewsHub.iml
+|   |   vcs.xml
+|   |   workspace.xml
+|   |
+|   \---scopes
+|           scope_settings.xml
+|
++---css //网页css相关文件
+|       bootstrap-combined.min.css
+|       bootstrap-responsive.css
+|       bootstrap-responsive.min.css
+|       bootstrap-theme.css
+|       bootstrap-theme.css.map
+|       bootstrap-theme.min.css
+|       bootstrap.css
+|       bootstrap.css.map
+|       bootstrap.min.css
+|       style.css
+|
++---fonts   //网页字体相关文件
+|       glyphicons-halflings-regular.eot
+|       glyphicons-halflings-regular.svg
+|       glyphicons-halflings-regular.ttf
+|       glyphicons-halflings-regular.woff
+|       glyphicons-halflings-regular.woff2
+|
++---img     //网页图片相关文件
+|       1.jpg
+|       1.png
+|       2.jpg
+|       2.png
+|       3.png
+|       glyphicons-halflings-white.png
+|       glyphicons-halflings.png
+|
++---js      ///网页js脚本相关文件
+|       bootstrap.js
+|       bootstrap.min.js
+|       jquery.min.js
+|
++---phpfetcher      //开源的php爬虫库
+|   |   deploy.sh
+|   |   phpfetcher.php
+|   |   README.md
+|   |
+|   +---demo
+|   |       crawl_baidu_page.php
+|   |       fetch_news.php      //用于爬取新闻
+|   |       iframe_example.php
+|   |       multi_page.php
+|   |       send_email.php      //用于发送邮件
+|   |       single_page.php
+|   |       structure
+|   |       test.php
+|   |       test.txt
+|   |
+|   +---Phpfetcher
+|   |   |   Error.php
+|   |   |   Log.php
+|   |   |
+|   |   +---Crawler     //网页爬取
+|   |   |       Abstract.php
+|   |   |       Default.php
+|   |   |
+|   |   +---Dom     //DOM解析相关文件
+|   |   |       Abstract.php
+|   |   |       SimpleHtmlDom.php
+|   |   |       simple_html_dom.php
+|   |   |
+|   |   +---Manager
+|   |   |       Abstract.php
+|   |   |
+|   |   \---Page
+|   |           Abstract.php
+|   |           Default.php
+|   |
+|   \---tests
+|           autoload.php
+|           Crawler_test.php
+|           curl_test.php
+|           errcode_test.php
+|           fetcher_db_test.php
+|           Page_test.html
+|           Page_test.php
+|           Page_test_utf8.html
+|           phpinfo_test.php
+|           return_this_test.php
+|           simple_html_dom.php
+|           test_simple_html_dom.php
+|
++---ueditor_sae-master      //修改过的百度UEditor编辑器插件（适配新浪云）
+|   |   config.yaml
+|   |   index.html
+|   |   README.md
+|   |   ueditor.all.js
+|   |   ueditor.all.min.js
+|   |   ueditor.config.js
+|   |   ueditor.parse.js
+|   |   ueditor.parse.min.js
+|   |
+|   +---.idea
+|   |   |   .name
+|   |   |   encodings.xml
+|   |   |   misc.xml
+|   |   |   modules.xml
+|   |   |   php.xml
+|   |   |   uedit.iml
+|   |   |   vagrant.xml
+|   |   |   vcs.xml
+|   |   |
+|   |   \---scopes
+|   |           scope_settings.xml
+|   |
+|   +---dialogs
+|   |   |   internal.js
+|   |   |
+|   |   +---anchor
+|   |   |       anchor.html
+|   |   |
+|   |   +---attachment
+|   |   |   |   attachment.css
+|   |   |   |   attachment.html
+|   |   |   |   attachment.js
+|   |   |   |
+|   |   |   +---fileTypeImages
+|   |   |   |       icon_chm.gif
+|   |   |   |       icon_default.png
+|   |   |   |       icon_doc.gif
+|   |   |   |       icon_exe.gif
+|   |   |   |       icon_jpg.gif
+|   |   |   |       icon_mp3.gif
+|   |   |   |       icon_mv.gif
+|   |   |   |       icon_pdf.gif
+|   |   |   |       icon_ppt.gif
+|   |   |   |       icon_psd.gif
+|   |   |   |       icon_rar.gif
+|   |   |   |       icon_txt.gif
+|   |   |   |       icon_xls.gif
+|   |   |   |
+|   |   |   \---images
+|   |   |           alignicon.gif
+|   |   |           alignicon.png
+|   |   |           bg.png
+|   |   |           file-icons.gif
+|   |   |           file-icons.png
+|   |   |           icons.gif
+|   |   |           icons.png
+|   |   |           image.png
+|   |   |           progress.png
+|   |   |           success.gif
+|   |   |           success.png
+|   |   |
+|   |   +---background
+|   |   |   |   background.css
+|   |   |   |   background.html
+|   |   |   |   background.js
+|   |   |   |
+|   |   |   \---images
+|   |   |           bg.png
+|   |   |           success.png
+|   |   |
+|   |   +---charts
+|   |   |   |   chart.config.js
+|   |   |   |   charts.css
+|   |   |   |   charts.html
+|   |   |   |   charts.js
+|   |   |   |
+|   |   |   \---images
+|   |   |           charts0.png
+|   |   |           charts1.png
+|   |   |           charts2.png
+|   |   |           charts3.png
+|   |   |           charts4.png
+|   |   |           charts5.png
+|   |   |
+|   |   +---emotion
+|   |   |   |   emotion.css
+|   |   |   |   emotion.html
+|   |   |   |   emotion.js
+|   |   |   |
+|   |   |   \---images
+|   |   |           0.gif
+|   |   |           bface.gif
+|   |   |           cface.gif
+|   |   |           fface.gif
+|   |   |           jxface2.gif
+|   |   |           neweditor-tab-bg.png
+|   |   |           tface.gif
+|   |   |           wface.gif
+|   |   |           yface.gif
+|   |   |
+|   |   +---gmap
+|   |   |       gmap.html
+|   |   |
+|   |   +---help
+|   |   |       help.css
+|   |   |       help.html
+|   |   |       help.js
+|   |   |
+|   |   +---image
+|   |   |   |   image.css
+|   |   |   |   image.html
+|   |   |   |   image.js
+|   |   |   |
+|   |   |   \---images
+|   |   |           alignicon.jpg
+|   |   |           bg.png
+|   |   |           icons.gif
+|   |   |           icons.png
+|   |   |           image.png
+|   |   |           progress.png
+|   |   |           success.gif
+|   |   |           success.png
+|   |   |
+|   |   +---insertframe
+|   |   |       insertframe.html
+|   |   |
+|   |   +---link
+|   |   |       link.html
+|   |   |
+|   |   +---map
+|   |   |       map.html
+|   |   |       show.html
+|   |   |
+|   |   +---music
+|   |   |       music.css
+|   |   |       music.html
+|   |   |       music.js
+|   |   |
+|   |   +---preview
+|   |   |       preview.html
+|   |   |
+|   |   +---scrawl
+|   |   |   |   scrawl.css
+|   |   |   |   scrawl.html
+|   |   |   |   scrawl.js
+|   |   |   |
+|   |   |   \---images
+|   |   |           addimg.png
+|   |   |           brush.png
+|   |   |           delimg.png
+|   |   |           delimgH.png
+|   |   |           empty.png
+|   |   |           emptyH.png
+|   |   |           eraser.png
+|   |   |           redo.png
+|   |   |           redoH.png
+|   |   |           scale.png
+|   |   |           scaleH.png
+|   |   |           size.png
+|   |   |           undo.png
+|   |   |           undoH.png
+|   |   |
+|   |   +---searchreplace
+|   |   |       searchreplace.html
+|   |   |       searchreplace.js
+|   |   |
+|   |   +---snapscreen
+|   |   |       snapscreen.html
+|   |   |
+|   |   +---spechars
+|   |   |       spechars.html
+|   |   |       spechars.js
+|   |   |
+|   |   +---table
+|   |   |       dragicon.png
+|   |   |       edittable.css
+|   |   |       edittable.html
+|   |   |       edittable.js
+|   |   |       edittd.html
+|   |   |       edittip.html
+|   |   |
+|   |   +---template
+|   |   |   |   config.js
+|   |   |   |   template.css
+|   |   |   |   template.html
+|   |   |   |   template.js
+|   |   |   |
+|   |   |   \---images
+|   |   |           bg.gif
+|   |   |           pre0.png
+|   |   |           pre1.png
+|   |   |           pre2.png
+|   |   |           pre3.png
+|   |   |           pre4.png
+|   |   |
+|   |   +---video
+|   |   |   |   video.css
+|   |   |   |   video.html
+|   |   |   |   video.js
+|   |   |   |
+|   |   |   \---images
+|   |   |           bg.png
+|   |   |           center_focus.jpg
+|   |   |           file-icons.gif
+|   |   |           file-icons.png
+|   |   |           icons.gif
+|   |   |           icons.png
+|   |   |           image.png
+|   |   |           left_focus.jpg
+|   |   |           none_focus.jpg
+|   |   |           progress.png
+|   |   |           right_focus.jpg
+|   |   |           success.gif
+|   |   |           success.png
+|   |   |
+|   |   +---webapp
+|   |   |       webapp.html
+|   |   |
+|   |   \---wordimage
+|   |           fClipboard_ueditor.swf
+|   |           imageUploader.swf
+|   |           tangram.js
+|   |           wordimage.html
+|   |           wordimage.js
+|   |
+|   +---lang
+|   |   +---en
+|   |   |   |   en.js
+|   |   |   |
+|   |   |   \---images
+|   |   |           addimage.png
+|   |   |           alldeletebtnhoverskin.png
+|   |   |           alldeletebtnupskin.png
+|   |   |           background.png
+|   |   |           button.png
+|   |   |           copy.png
+|   |   |           deletedisable.png
+|   |   |           deleteenable.png
+|   |   |           listbackground.png
+|   |   |           localimage.png
+|   |   |           music.png
+|   |   |           rotateleftdisable.png
+|   |   |           rotateleftenable.png
+|   |   |           rotaterightdisable.png
+|   |   |           rotaterightenable.png
+|   |   |           upload.png
+|   |   |
+|   |   \---zh-cn
+|   |       |   zh-cn.js
+|   |       |
+|   |       \---images
+|   |               copy.png
+|   |               localimage.png
+|   |               music.png
+|   |               upload.png
+|   |
+|   +---php
+|   |       action_crawler.php
+|   |       action_list.php
+|   |       action_upload.php
+|   |       config.json
+|   |       config_sae.json     //UEditor对新浪云的相关配置
+|   |       controller.php
+|   |       Uploader.class.php
+|   |       UploaderSae.class.php
+|   |
+|   +---themes
+|   |   |   iframe.css
+|   |   |
+|   |   \---default
+|   |       |   dialogbase.css
+|   |       |
+|   |       +---css
+|   |       |       ueditor.css
+|   |       |       ueditor.min.css
+|   |       |
+|   |       \---images
+|   |               anchor.gif
+|   |               arrow.png
+|   |               arrow_down.png
+|   |               arrow_up.png
+|   |               button-bg.gif
+|   |               cancelbutton.gif
+|   |               charts.png
+|   |               cursor_h.gif
+|   |               cursor_h.png
+|   |               cursor_v.gif
+|   |               cursor_v.png
+|   |               dialog-title-bg.png
+|   |               filescan.png
+|   |               highlighted.gif
+|   |               icons-all.gif
+|   |               icons.gif
+|   |               icons.png
+|   |               loaderror.png
+|   |               loading.gif
+|   |               lock.gif
+|   |               neweditor-tab-bg.png
+|   |               pagebreak.gif
+|   |               scale.png
+|   |               sortable.png
+|   |               spacer.gif
+|   |               sparator_v.png
+|   |               table-cell-align.png
+|   |               tangram-colorpicker.png
+|   |               toolbar_bg.png
+|   |               unhighlighted.gif
+|   |               upload.png
+|   |               videologo.gif
+|   |               word.gif
+|   |               wordpaste.png
+|   |
+|   \---third-party
+|       |   jquery-1.10.2.js
+|       |   jquery-1.10.2.min.js
+|       |   jquery-1.10.2.min.map
+|       |
+|       +---codemirror
+|       |       codemirror.css
+|       |       codemirror.js
+|       |
+|       +---highcharts
+|       |   |   highcharts-more.js
+|       |   |   highcharts-more.src.js
+|       |   |   highcharts.js
+|       |   |   highcharts.src.js
+|       |   |
+|       |   +---adapters
+|       |   |       mootools-adapter.js
+|       |   |       mootools-adapter.src.js
+|       |   |       prototype-adapter.js
+|       |   |       prototype-adapter.src.js
+|       |   |       standalone-framework.js
+|       |   |       standalone-framework.src.js
+|       |   |
+|       |   +---modules
+|       |   |       annotations.js
+|       |   |       annotations.src.js
+|       |   |       canvas-tools.js
+|       |   |       canvas-tools.src.js
+|       |   |       data.js
+|       |   |       data.src.js
+|       |   |       drilldown.js
+|       |   |       drilldown.src.js
+|       |   |       exporting.js
+|       |   |       exporting.src.js
+|       |   |       funnel.js
+|       |   |       funnel.src.js
+|       |   |       heatmap.js
+|       |   |       heatmap.src.js
+|       |   |       map.js
+|       |   |       map.src.js
+|       |   |       no-data-to-display.js
+|       |   |       no-data-to-display.src.js
+|       |   |
+|       |   \---themes
+|       |           dark-blue.js
+|       |           dark-green.js
+|       |           gray.js
+|       |           grid.js
+|       |           skies.js
+|       |
+|       +---snapscreen
+|       |       UEditorSnapscreen.exe
+|       |
+|       +---SyntaxHighlighter
+|       |       shCore.js
+|       |       shCoreDefault.css
+|       |
+|       +---video-js
+|       |   |   video-js.css
+|       |   |   video-js.min.css
+|       |   |   video-js.swf
+|       |   |   video.dev.js
+|       |   |   video.js
+|       |   |
+|       |   \---font
+|       |           vjs.eot
+|       |           vjs.svg
+|       |           vjs.ttf
+|       |           vjs.woff
+|       |
+|       +---webuploader
+|       |       Uploader.swf
+|       |       webuploader.css
+|       |       webuploader.custom.js
+|       |       webuploader.custom.min.js
+|       |       webuploader.flashonly.js
+|       |       webuploader.flashonly.min.js
+|       |       webuploader.html5only.js
+|       |       webuploader.html5only.min.js
+|       |       webuploader.js
+|       |       webuploader.min.js
+|       |       webuploader.withoutimage.js
+|       |       webuploader.withoutimage.min.js
+|       |
+|       \---zeroclipboard
+|               ZeroClipboard.js
+|               ZeroClipboard.min.js
+|               ZeroClipboard.swf
+|
+\---wechat      //微信公众平台相关文件
+        .gitignore
+        binding.php     //用户绑定页面
+        bind_handler.php    //处理绑定事件
+        button.txt      //自定义按钮的json
+        connect.php     //连接至数据库
+        redirect.php    //重定向方法
+        unbinding.php   //解绑界面
+        wechat.php  //与微信公众平台的对接
+        wechatCallback.php  //对微信公众平台传来消息的回调方法

@@ -1,0 +1,64 @@
+数据库结构
+用户表
+| user  | CREATE TABLE `user` (
+  `name` varchar(255) NOT NULL,
+  `psw` varchar(255) NOT NULL,
+  `email` varchar(50) DEFAULT NULL,
+  `privilege` int(1) DEFAULT '0',
+  PRIMARY KEY (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 |
+
+新闻表
+| news  | CREATE TABLE `news` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) NOT NULL,
+  `detail` text,
+  `publisher` varchar(255) NOT NULL,
+  `timestamp` datetime DEFAULT NULL,
+  `source` varchar(20) DEFAULT NULL,
+  `class` varchar(20) DEFAULT NULL,
+  `view_count` int(10) DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `publisher` (`publisher`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 |
+
+评论表
+| comment | CREATE TABLE `comment` (
+  `news_id` int(10) NOT NULL,
+  `com_id` int(10) NOT NULL,
+  `detail` varchar(255) NOT NULL,
+  `timestamp` datetime NOT NULL,
+  `user_name` varchar(255) NOT NULL,
+  PRIMARY KEY (`news_id`,`com_id`),
+  KEY `user_name` (`user_name`),
+  CONSTRAINT `comment_ibfk_1` FOREIGN KEY (`news_id`) REFERENCES `news` (`id`),
+  CONSTRAINT `comment_ibfk_2` FOREIGN KEY (`user_name`) REFERENCES `user` (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 |
+
+模板表
+| template | CREATE TABLE `template` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `detail` text,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 |
+
+
+订阅表
+| subscribe | CREATE TABLE `subscribe` (
+  `user_name` varchar(255) NOT NULL,
+  `news_class` varchar(20) DEFAULT NULL,
+  KEY `user_name` (`user_name`),
+  CONSTRAINT `subscribe_ibfk_1` FOREIGN KEY (`user_name`) REFERENCES `user` (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 |
+
+
+绑定关系表（微信）
+| binding | CREATE TABLE `binding` (
+  `wechat_id` varchar(255) NOT NULL,
+  `user_name` varchar(255) NOT NULL,
+  PRIMARY KEY (`wechat_id`),
+  KEY `user_name` (`user_name`),
+  CONSTRAINT `binding_ibfk_1` FOREIGN KEY (`user_name`) REFERENCES `user` (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 |

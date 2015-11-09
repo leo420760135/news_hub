@@ -14,7 +14,7 @@ else
     $password_ag = $_POST["password_ag"];
 	sign_up($connect,$name,$password,$password_ag);
 }
-
+//登录
 function sign_in(PDO $connect,$name,$password)
 {
     $sql = "select * from user where name='{$name}' and psw='{$password}';";
@@ -33,7 +33,7 @@ function sign_in(PDO $connect,$name,$password)
         redirect("sign.php","alert('用户名或密码错误');");
     }
 }
-
+//注册
 function sign_up(PDO $connect,$name,$password,$password_ag)
 {
     if($password != $password_ag)
